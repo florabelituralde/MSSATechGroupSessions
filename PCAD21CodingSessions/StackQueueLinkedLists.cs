@@ -22,7 +22,42 @@
          */
         public static string[] ReverseFromKUsingStack(this string[] fruitArray, int k)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //guard clause
+                if (fruitArray == null || k >= fruitArray.Length)
+                {
+                    return fruitArray;
+                }
+
+                Stack<string> fruitStack = new Stack<string>();
+
+                for(int i = k; i < fruitArray.Length; i++)
+                {
+                    /*
+                     * elderberry
+                     * date
+                     cherry
+                     */
+                    fruitStack.Push(fruitArray[i]);
+                }
+
+                for(int i = k; i < fruitArray.Length; i++)
+                {
+
+                    fruitArray[i] = fruitStack.Pop();
+                }
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                Console.WriteLine("Invalid index: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+               Console.WriteLine("An error occurred while processing the input: " + ex.Message);
+            }
+
+            return fruitArray;
         }
 
 
@@ -43,6 +78,11 @@
             Each element in fruitArray is a non-empty string.
             n is a non-negative integer.
          */
+        // tong
+        // 
+        // Some hints from Tyler for this one, Tong...
+        // Remember a.) a queue can take an array as a parameter on its constructor
+        // b.) a queue has a method `ToArray()`
         public static string[] RemoveUsingQueue(this string[] fruitArray, int n)
         {
             throw new NotImplementedException();
@@ -67,9 +107,16 @@
             Each element in fruitArray is a non-empty string.
             k is a non-negative integer.
          */
-
+        // Clark
         public static string GetKthElementUsingLinkedList(this string[] fruitArray, int k)
         {
+            LinkedList<string> list = new();
+            /*
+            Make a list
+            if the list is smaller than k return false
+            if
+            */
+            
             throw new NotImplementedException();
         }
 
@@ -94,8 +141,26 @@
             
          * 
          */
+         //Matt
+         //Rotate Array: find item at kth element, put items in front on kth elements at
+         //the beginning of array
+         //Constraints: use linked list
+         //Linked List: each item point at next
+
+         //Strategy - Reversing linked list: "break" link at kth
+         //element, make kth+1 element head of array, and point last item of array to
+         //original head
+        // mattheus
         public static string[] RotateFruitArrayUsingLinkedList(this string[] fruitArray, int k)
         {
+            // Do guard clause first
+
+            LinkedList<string> originalArray = new(fruitArray)
+
+            var temp = originalArray;
+            originalArray.Remove(originalArray[k]) //
+            originalArray.First = originalArray[k+1];
+            originalArray.AddLast(temp) //Will add all of original array, not only first part
             throw new NotImplementedException();
         }
     }
