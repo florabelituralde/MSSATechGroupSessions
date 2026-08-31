@@ -138,30 +138,55 @@
             The array fruitArray can contain up to 10^5 elements.
             Each element in fruitArray is a non-empty string.
             k is a non-negative integer.
-            
-         * 
          */
          //Matt
          //Rotate Array: find item at kth element, put items in front on kth elements at
          //the beginning of array
+
          //Constraints: use linked list
          //Linked List: each item point at next
 
          //Strategy - Reversing linked list: "break" link at kth
          //element, make kth+1 element head of array, and point last item of array to
          //original head
-        // mattheus
+
+       // mattheus
         public static string[] RotateFruitArrayUsingLinkedList(this string[] fruitArray, int k)
         {
-            // Do guard clause first
+            try
+            {
+                // Guard clauses
+                if (fruitArray == null || k < 0 || k >= fruitArray.Length)
+                {
+                    return fruitArray;
+                }
 
-            LinkedList<string> originalArray = new(fruitArray)
+                var modifiedArray = new LinkedList<string>(fruitArray);
 
-            var temp = originalArray;
-            originalArray.Remove(originalArray[k]) //
-            originalArray.First = originalArray[k+1];
-            originalArray.AddLast(temp) //Will add all of original array, not only first part
-            throw new NotImplementedException();
+                //initalize kthNode to the first node of the linked list and then iterate through the linked list to get to the k-th node
+                var kthNode = modifiedArray.First;
+                for (int i = 0; i < k; i++)
+                {
+                    kthNode = kthNode!.Next;
+                }
+
+                //Sets the new head to the k+1 node
+                var newHead = kthNode!.Next;
+
+                // Move nodes from first part of list to the end
+                while (modifiedArray.First != newHead) //limits while loop to only go until kth node
+                {
+                    var firstValue = modifiedArray.First!.Value;
+                    modifiedArray.RemoveFirst(); //removes the current first node
+                    modifiedArray.AddLast(firstValue); //adds it to the end of the list
+                }
+
+                return modifiedArray.ToArray(); //because the method is of string[] type, we convert the linked list back to an array.
+            }
+            catch (Exception ex) 
+            { 
+                throw new NotImplementedException();
+            }
         }
     }
 }
